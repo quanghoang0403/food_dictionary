@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "70985190023",
+    "project_id": "food-dictionary-db",
+    "storage_bucket": "food-dictionary-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70985190023:android:0e80247f9236af5e4a8622",
+        "android_client_info": {
+          "package_name": "com.example.food_dictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70985190023-ghdl0bdqblce9k1vkbnhnbblq746em9u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtjSOGY76ZDNlwkxzCmJU7-VvEdDd703g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70985190023-ghdl0bdqblce9k1vkbnhnbblq746em9u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
