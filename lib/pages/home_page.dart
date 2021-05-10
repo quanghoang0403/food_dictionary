@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                           press: () {}),
                       TempFood(
                           size: size,
-                          image: "assets/images/home/img05.png",
+                          image: "assets/images/home/img06.png",
                           title: "Meal 06",
                           press: () {}),
                     ],
