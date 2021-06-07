@@ -1,0 +1,88 @@
+import 'package:food_dictionary/model/ingredient.dart';
+
+final allIngredietnts = <Ingredient>[
+  Ingredient(
+id: 1,
+name: 'Tomato',
+    per: '1 small tomato (91g)',
+    urlImage:
+    'assets/images/search01/img1.jpg',
+calo: '95',
+fat: '0.3g',
+sodium: '1.8mg',
+carbo: '25g',
+fiber: '4.4g',
+sugar: '18.9g',
+protein: '70',
+),
+Ingredient(
+id: 2,
+name: 'Banana',
+  per: '1 medium banana (118 g)',
+urlImage:
+    'assets/images/search01/img2.jpg',
+calo: '105',
+fat: '0.4g',
+sodium: '1.2mg',
+carbo: '27g',
+fiber: '3.1g',
+sugar: '14.4g',
+protein: '1.3g',
+),
+  Ingredient(
+    id: 3,
+    name: 'Grape',
+    per: '1 cup (92g)',
+    urlImage:
+    'assets/images/search01/img3.jpg',
+    calo: '62',
+    fat: '0.3g',
+    sodium: '2mg',
+    carbo: '16g',
+    fiber: '1g',
+    sugar: '15g',
+    protein: '0.6g',
+  ),
+  Ingredient(
+    id: 4,
+    name: 'Lemon',
+    per: '1 lemon(58g)',
+    urlImage:
+    'assets/images/search01/img4.jpg',
+    calo: '17',
+    fat: '0.2g',
+    sodium: '1mg',
+    carbo: ' 1.6g',
+    fiber: '1.5g',
+    sugar: '15g',
+    protein: '0.6g',
+  ),
+  Ingredient(
+    id: 5,
+    name: 'Cabbage',
+    per: '1 cup (92g)',
+    urlImage:
+    'assets/images/search01/img5.jpg',
+    calo: '62',
+    fat: '0.3g',
+    sodium: '2mg',
+    carbo: '16g',
+    fiber: '1g',
+    sugar: '15g',
+    protein: '0.6g',
+  ),
+  Ingredient(
+    id: 6,
+    name: 'Potato',
+    per: '1 potato (58g)',
+    urlImage:
+    'assets/images/search01/img6.jpg',
+    calo: '17',
+    fat: '0.2g',
+    sodium: '1mg',
+    carbo: ' 1.6g',
+    fiber: '1.5g',
+    sugar: '15g',
+    protein: '0.6g',
+  ),
+];

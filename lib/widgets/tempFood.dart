@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/widgets/colors.dart';
+import 'package:food_dictionary/widgets/style.dart';
 //import 'package:foodiction1/widgets/style.dart';
 //import 'package:foodiction1/widgets/body.dart';
 

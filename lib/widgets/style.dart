@@ -31,12 +31,39 @@ class PrimaryText extends StatelessWidget {
 class BasicText extends StatelessWidget {
   final String text;
   final double size;
+  final Color color;
   final FontWeight fontWeight;
   final double height;
 
   const BasicText({
     this.text,
     this.size: 20,
+    this.color: AppColors.cor1,
+    this.fontWeight: FontWeight.w400,
+    this.height: 1.3
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+      style: TextStyle(
+          fontSize: size,
+          color: color,
+          fontWeight: fontWeight,
+          fontFamily: 'Poppins',
+          height: height),
+    );
+  }
+}
+
+class subText extends StatelessWidget {
+  final String text;
+  final double size;
+  final FontWeight fontWeight;
+  final double height;
+
+  const subText({
+    this.text,
+    this.size: 17,
     this.fontWeight: FontWeight.w400,
     this.height: 1.3
   });
@@ -46,6 +73,7 @@ class BasicText extends StatelessWidget {
       style: TextStyle(
           fontSize: size,
           fontWeight: fontWeight,
+          color: Color(0xFF525050),
           fontFamily: 'Poppins',
           height: height),
     );

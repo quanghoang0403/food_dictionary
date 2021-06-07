@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_dictionary/control_page.dart';
 import 'package:food_dictionary/widgets/sign_in/sign_up_widget.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:food_dictionary/pages/login_page.dart';
@@ -169,13 +170,13 @@ class IntroPage extends StatelessWidget {
         onDone: () {
           Navigator.push(
             context,
-            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: LoginPage()),
+            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage()),
           );
         },
         onSkip: () {
           Navigator.push(
             context,
-            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: LoginPage()),
+            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage()),
           );
         },
         globalBackgroundColor: Colors.white,

@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  js: ^0.6.2
   flutter:
     sdk: flutter
   # state management
@@ -62,6 +63,8 @@ flutter:
     #- assets/images/
     - assets/images/intro/
     - assets/images/home/
+    - assets/images/search01/
+    - assets/images/search01/category/
     - assets/icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

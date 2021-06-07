@@ -8,19 +8,33 @@ import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
 
 class SearchPage extends StatelessWidget {
+  const SearchPage({
+    Key key,
+    @required this.selected_Tab,
+  }) :  assert(selected_Tab != null),
+        super(key: key);
+  final int selected_Tab;
   @override
   Widget build(BuildContext context) {
     //Size size = MediaQuery.of(context).size;
+    int index = selected_Tab;
     return MaterialApp(
-    home: ControlTab());
+    home: ControlTab(index_Tab: index,));
   }
 }
 
 class ControlTab extends StatelessWidget {
+  const ControlTab({
+    Key key,
+  @required this.index_Tab,
+  }) :super(key: key);
+  final int index_Tab;
   @override 
   Widget build(BuildContext context){
+
 return DefaultTabController(
   length: 3,
+  initialIndex: index_Tab,
   child:   Scaffold( 
   appBar: AppBar(
     toolbarHeight: 60,
@@ -49,7 +63,7 @@ return DefaultTabController(
 children: [
   Search01(),
   Search02(),
-  Search03(),
+  Create(),
 ],
   )
   ),
