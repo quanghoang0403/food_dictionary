@@ -25,7 +25,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:food_dictionary/control_page.dart';
 import 'package:food_dictionary/pages/splash_page.dart';
 
 Future main() async {
@@ -40,13 +39,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: title,
-    theme: ThemeData(primarySwatch: Colors.deepOrange),
-    routes: <String, WidgetBuilder>{
-      //'/HomeScreen': (BuildContext context) => IntroScreen(),
-    },
-    home:SplashPage(),
-  );
+        debugShowCheckedModeBanner: false,
+        title: title,
+        theme: ThemeData(primarySwatch: Colors.deepOrange),
+        routes: <String, WidgetBuilder>{
+          //'/HomeScreen': (BuildContext context) => IntroScreen(),
+        },
+        home: SplashPage(),
+      );
 }
 
