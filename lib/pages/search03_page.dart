@@ -211,8 +211,8 @@ class CreateState extends State<Create> {
     print("list$choosed_ingredients");
 for (var i=0; i < choosed_ingredients.length; i++){
   for (var j=0; j<allRecipes.length; j++){
-    for (var k=0; k< allRecipes[j].ingrdients.length; k++){
-      if (choosed_ingredients[i].name == allRecipes[j].ingrdients[k].name){
+    for (var k=0; k< allRecipes[j].ingredients.length; k++){
+      if (choosed_ingredients[i].name == allRecipes[j].ingredients[k].name){
         var flat = 0;
         for (var check=0; check< recipes.length; check++){
           if (allRecipes[j].name  == recipes[check].name ){

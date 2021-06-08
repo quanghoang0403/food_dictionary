@@ -10,6 +10,7 @@ class Ingredient {
   final String fiber;
   final String sugar;
   final String protein;
+  List<String> healthBenifit =[];
   int choosed = 1;
   Ingredient({
     this.id,
@@ -23,6 +24,7 @@ class Ingredient {
     this.fiber,
     this.sugar,
     this.protein,
+    this.healthBenifit,
     choosed = 1,
   });
 

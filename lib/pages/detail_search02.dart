@@ -13,6 +13,7 @@ import 'package:food_dictionary/model/recipe.dart';
 
 class DetailRecipe extends StatelessWidget {
   final Recipe recipe;
+
   DetailRecipe({@required this.recipe});
 
   @override
@@ -24,7 +25,6 @@ class DetailRecipe extends StatelessWidget {
             toolbarHeight: 70,
             backgroundColor: Colors.white,
             elevation: 0,
-            // leadingWidth: 600,
             leading: IconButton(
                 icon: Icon(
                   Icons.arrow_back_ios,
@@ -52,8 +52,6 @@ class DetailRecipe extends StatelessWidget {
                 // BasicText(text: "So good, bae!", size: 18),
               ])),
             ]),
-
-
         body: DefaultTabController(
             length: 3,
             child: NestedScrollView(
@@ -86,11 +84,11 @@ class DetailRecipe extends StatelessWidget {
                                 SizedBox(
                                   height: 16,
                                 ),
-                                buildNutrition(recipe.carbo, 'Carbo', 'g'),
+                                buildNutrition(recipe.Total_Carbohydrate, 'Carbo', 'g'),
                                 SizedBox(
                                   height: 16,
                                 ),
-                                buildNutrition(recipe.protein, 'Protein', 'g'),
+                                buildNutrition(recipe.Protein, 'Protein', 'g'),
                               ],
                             ),
                             Positioned(
@@ -113,8 +111,7 @@ class DetailRecipe extends StatelessWidget {
                                       ),
                                       child: ClipOval(
                                           child: Image(
-                                        image: AssetImage(
-                                            recipe.urlImage),
+                                        image: AssetImage(recipe.urlImage),
                                         height: 300,
                                         width: 300,
                                         fit: BoxFit.cover,
@@ -159,53 +156,43 @@ class DetailRecipe extends StatelessWidget {
   }
 
   Widget Ingredients() {
-    // for (var i =1; i<= recipe.ingrdients.length; i++) {
-    //   print(recipe.ingrdients[i].name);
-    // }
-    return ListView(children: [
-      Padding(
-        padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(recipe.ingrdients[0].name),
-            Text(recipe.ingrdients[1].name),
-            Text(recipe.ingrdients[2].name),
-            Text(recipe.ingrdients[3].name),
-            // Text(recipe.ingrdients[4].name),
-            // Text(recipe.ingrdients[5].name),
-            SizedBox(
-              height: 16,
-            ),
-          ],
-        ),
-      )
-    ]);
+    return ListView.builder(
+        itemCount: recipe.ingredients.length,
+        itemBuilder: (context, index) {
+          // PrimaryText(text: 'Per ' + recipe.servings.toString());
+          final ingredient = recipe.ingredients[index];
+          return Text(ingredient.name);
+        });
   }
 
+  // return ListView(children: [
+  //   Padding(
+  //     padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Text(recipe.ingrdients[0].name),
+  //         Text(recipe.ingrdients[1].name),
+  //         Text(recipe.ingrdients[2].name),
+  //         Text(recipe.ingrdients[3].name),
+  //         // Text(recipe.ingrdients[4].name),
+  //         // Text(recipe.ingrdients[5].name),
+  //         SizedBox(
+  //           height: 16,
+  //         ),
+  //       ],
+  //     ),
+  //   )
+  // ]);
+
   Widget Instructions() {
-    return ListView(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Ingredients'),
-              Text("2 cups pecans, divided"),
-              Text("1 tablespoon unsalted butter, melted"),
-              Text("1/4 teaspoon kosher salt, plus more"),
-              Text("3 tablespoons fresh lemon juice"),
-              Text("2 tablespoons olive oil"),
-              Text("1/2 teaspoon honey"),
-              SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-        )
-      ],
-    );
+    return ListView.builder(
+        itemCount: recipe.instructions.length,
+        itemBuilder: (context, index) {
+          // PrimaryText(text: 'Per ' + recipe.servings.toString());
+          final step = recipe.instructions[index];
+          return Text(step);
+        });
   }
 
   Widget Health_Score() {
@@ -236,7 +223,7 @@ class DetailRecipe extends StatelessWidget {
     );
   }
 
-  Widget buildNutrition(int value, String title, String subTitle) {
+  Widget buildNutrition(String value, String title, String subTitle) {
     return Container(
       height: 60,
       width: 150,
