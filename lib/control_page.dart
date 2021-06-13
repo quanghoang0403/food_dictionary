@@ -1,83 +1,118 @@
 //import 'dart:html';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/pages/home_page.dart';
-import 'package:food_dictionary/pages/search_page.dart';
+import 'package:food_dictionary/pages/search_ingredient.dart';
+import 'package:food_dictionary/pages/search_recipe.dart';
+import 'package:food_dictionary/pages/create_from_ingre.dart';
 import 'package:food_dictionary/pages/person_page.dart';
 import 'package:food_dictionary/widgets/colors.dart';
+
 class ControlPage extends StatefulWidget {
+  int lastPage = 0;
+  ControlPage({@required this.lastPage});
   @override
-  _PageState createState()=> _PageState();
+  _PageState createState() => _PageState(lastPage: lastPage);
 }
 
-class _PageState extends State<ControlPage>{
-  int currentTab = 0;
+class _PageState extends State<ControlPage> {
+  final int lastPage;
   final PageStorageBucket bucket = PageStorageBucket();
   final user = FirebaseAuth.instance.currentUser;
-  Widget currentScreen = HomePage();
+  Widget currentScreen;
+  _PageState({@required this.lastPage});
 
+  @override
+  void initState() {
+    super.initState();
+    getPage(lastPage);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageStorage(
         child: currentScreen,
-        bucket: bucket,),
-      //floatingActionButton: FloatingActionButton(
-      //child: Icon(Icons.add),
-      //onPressed: (){},), 
-      //floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 50,
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              MaterialButton(
-                  minWidth: 80,
-                  onPressed: (){
-                    setState((){
-                      currentScreen = HomePage();
-                      currentTab = 0;
-                    });
-                  },
-                  child: Icon(
-                      Icons.home,
-                      color: currentTab == 0 ? AppColors.cor2 : AppColors.lightGray,
-                      size: 30)
-              ),
-              MaterialButton(
-                  minWidth: 30,
-                  onPressed: (){
-                    setState((){
-                      currentScreen = SearchPage(selected_Tab: 0,);
-                      currentTab = 1;
-                    });
-                  },
-                  child: Icon(
-                      Icons.search,
-                      color: currentTab == 1 ? AppColors.cor2 : AppColors.lightGray,
-                      size: 30)
-              ),
-              MaterialButton(
-                  minWidth: 40,
-                  onPressed: (){
-                    setState((){
-                      currentScreen = Person();
-                      currentTab = 2;
-                    });
-                  },
-                  child: Icon(
-
-                      Icons.person,
-                      color: currentTab == 2 ? AppColors.cor2 : AppColors.lightGray,
-                      size: 30)
-              )
-            ],
-          ),
-        ),
+        bucket: bucket,
+      ),
+      bottomNavigationBar: CurvedNavigationBar(
+        index: lastPage,
+        height: 48,
+        color: AppColors.cor2,
+        backgroundColor: Colors.white.withOpacity(0),
+        buttonBackgroundColor: AppColors.cor2,
+        // animationDuration: Duration(
+        //   microseconds: 500,
+        // ),
+        // animationCurve: Curves.bounceInOut,
+        items: [
+          Icon(Icons.visibility_outlined, size: 28, color: Colors.white),
+          Icon(Icons.set_meal, size: 28, color: Colors.white),
+          Icon(Icons.room_service, size: 28, color: Colors.white),
+          Icon(Icons.restaurant_menu, size: 28, color: Colors.white),
+          Icon(Icons.person, size: 28, color: Colors.white),
+        ],
+        onTap: (index) {
+          index == 0
+              ? setState(() {
+                  currentScreen = HomePage();
+            lastPage == 0;
+                })
+              : index == 1
+                  ? setState(() {
+                      currentScreen = Search01();
+                      lastPage == 1;
+                    })
+                  : index == 2
+                      ? setState(() {
+                          currentScreen = Search02();
+                          lastPage == 2;
+                        })
+                      : index == 3
+                          ? setState(() {
+                              currentScreen = Create();
+                              lastPage == 3;
+                            })
+                          : index == 4
+                              ? setState(() {
+                                  currentScreen = Person();
+                                  lastPage == 4;
+                                })
+                              : setState(() {
+                                  currentScreen = HomePage();
+                                  lastPage == 0;
+                                });
+          //Handle button tap
+        },
       ),
     );
+  }
+
+  void getPage (int lastPage) {
+    lastPage == 0
+        ? setState(() {
+      currentScreen = HomePage();
+
+    }):
+    lastPage == 1
+        ? setState(() {
+      currentScreen = Search01();
+    })
+        : lastPage == 2
+        ? setState(() {
+      currentScreen = Search02();
+    })
+        : lastPage == 3
+        ? setState(() {
+      currentScreen = Create();
+    })
+        : lastPage == 4
+        ? setState(() {
+      currentScreen = Person();
+    })
+        : setState(() {
+      currentScreen = HomePage();
+    });
+    //Handle button tap
   }
 }

@@ -8,6 +8,7 @@ class Recipe {
   List<Ingredient> ingredients = [];
   List<String> instructions = [];
   List<double>  countIngre = [];
+  final int favo;
   final String calo;
   final String Total_Fat;
   final String Saturated_Fat;
@@ -30,6 +31,7 @@ class Recipe {
     this.urlImage,
     this.ingredients,
     this.countIngre,
+    this.favo,
     this.servings,
     this.time,
     this.instructions,

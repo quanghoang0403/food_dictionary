@@ -22,6 +22,7 @@ environment:
 
 dependencies:
   js: ^0.6.2
+  curved_navigation_bar: ^0.3.7
   flutter:
     sdk: flutter
   # state management
@@ -65,6 +66,8 @@ flutter:
     - assets/images/home/
     - assets/images/search01/
     - assets/images/search01/category/
+    - assets/images/search01/ingredients/
+    - assets/images/search01/recipes/
     - assets/icons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -55,14 +55,16 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final styleActive = TextStyle(color: Colors.black);
-    final styleHint = TextStyle(color: Colors.black54);
+    final styleActive = TextStyle(color: Colors.black, fontSize: 18);
+    final styleHint = TextStyle(color: Colors.black54, fontSize: 18);
     final style = widget.text.isEmpty ? styleHint : styleActive;
 
     return Container(
-      margin: EdgeInsets.all(20),
+      height: 55,
+      margin: EdgeInsets.symmetric(horizontal: 5),
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
       decoration: BoxDecoration(
+        color: Colors.white,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(
             color: AppColors.lightGray.withOpacity(0.5),
@@ -71,7 +73,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          icon: Icon(Icons.search, color: style.color),
+          icon: Icon(Icons.search, color: AppColors.cor2),
           suffixIcon: widget.text.isNotEmpty
               ? GestureDetector(
             child: Icon(Icons.close, color: style.color),

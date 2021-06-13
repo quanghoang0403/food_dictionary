@@ -31,14 +31,14 @@ class Ingredient {
   factory Ingredient.fromJson(Map<String, dynamic> json) => Ingredient(
     id: json['id'],
     name: json['name'],
-    urlImage: json['urlImage'],
+    // urlImage: json['urlImage'],
   );
 
   Map<String, dynamic> toJson() => {
     'id': id,
     'name': name,
     'protein': protein,
-    'urlImage': urlImage,
+    // 'urlImage': urlImage,
   };
 }
 

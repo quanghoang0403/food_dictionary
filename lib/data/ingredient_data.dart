@@ -149,7 +149,7 @@ final allIngredietnts = <Ingredient>[
     fiber: '1.5g',
     sugar: '15g',
     protein: '0.6g',
-    healthBenifit: ['Improves Diabetes Management','Promotes Regularity','Aids Weight Loss', 'Lowers Blood Pressure'],
+    healthBenifit: ['Improves Diabetes Management','Promotes Regularity','Aids Weight Loss', 'Lowers Blood Pressure', 'Lowers Blood Pressure'],
   ),
   Ingredient(
     id: 11,

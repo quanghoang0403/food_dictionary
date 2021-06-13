@@ -170,13 +170,13 @@ class IntroPage extends StatelessWidget {
         onDone: () {
           Navigator.push(
             context,
-            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage()),
+            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage(lastPage: 0,)),
           );
         },
         onSkip: () {
           Navigator.push(
             context,
-            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage()),
+            PageTransition(duration: Duration(milliseconds: 300), type: PageTransitionType.rightToLeft, child: ControlPage(lastPage: 0,)),
           );
         },
         globalBackgroundColor: Colors.white,

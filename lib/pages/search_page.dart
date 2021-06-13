@@ -1,9 +1,9 @@
 //import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/pages/home_page.dart';
-import 'package:food_dictionary/pages/search01_page.dart';
-import 'package:food_dictionary/pages/search02_page.dart';
-import 'package:food_dictionary/pages/search03_page.dart';
+import 'package:food_dictionary/pages/search_ingredient.dart';
+import 'package:food_dictionary/pages/search_recipe.dart';
+import 'package:food_dictionary/pages/create_from_ingre.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
 
@@ -35,7 +35,8 @@ class ControlTab extends StatelessWidget {
 return DefaultTabController(
   length: 3,
   initialIndex: index_Tab,
-  child:   Scaffold( 
+  child:   Scaffold(
+   resizeToAvoidBottomInset: false,
   appBar: AppBar(
     toolbarHeight: 60,
     elevation: 0,

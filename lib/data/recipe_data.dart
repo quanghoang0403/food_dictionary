@@ -3,11 +3,12 @@ import 'package:food_dictionary/data/ingredient_data.dart';
 final allRecipes = <Recipe>[
   Recipe(
     id: 1,
-    name: 'Spicy Corn Shrimp',
+    name: 'Spicy Corn',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/1.PNG',
     ingredients: [allIngredietnts[17], allIngredietnts[29], allIngredietnts[19], allIngredietnts[14]],
     countIngre: [1, 2, 1, 4],
+    favo: 10,
     servings: 2,
     time: 10,
     instructions: [
@@ -20,11 +21,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 2,
-    name: 'Tomato Fennel Stew',
+    name: 'Tomato Fennel',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/2.PNG',
     ingredients: [allIngredietnts[28], allIngredietnts[19], allIngredietnts[23], allIngredietnts[24]],
     countIngre: [3, 2, 2, 1],
+    favo: 105,
     servings: 5,
     time: 60,
     instructions: [
@@ -38,11 +40,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 3,
-    name: 'Greek Brown Rice Salad',
+    name: 'Greek Salad',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/3.PNG',
     ingredients: [allIngredietnts[22], allIngredietnts[19], allIngredietnts[14], allIngredietnts[15]],
     countIngre: [1, 2, 1, 3],
+    favo: 29,
     servings: 4,
     time: 30,
     calo: '120',
@@ -56,9 +59,10 @@ final allRecipes = <Recipe>[
     id: 4,
     name: 'Chicken Soup',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/4.PNG',
     ingredients: [allIngredietnts[0], allIngredietnts[10], allIngredietnts[25], allIngredietnts[16]],
     countIngre: [1, 2, 1, 4],
+    favo: 40,
     servings: 2,
     time: 10,
     instructions: [
@@ -71,11 +75,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 5,
-    name: 'Mushroom Barley Chicken',
+    name: 'Mushroom Chicken',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/5.PNG',
     ingredients: [allIngredietnts[25], allIngredietnts[22], allIngredietnts[25], allIngredietnts[12]],
     countIngre: [3, 2, 2, 1],
+    favo: 17,
     servings: 5,
     time: 60,
     instructions: [
@@ -89,11 +94,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 6,
-    name: 'Vegetarian Egg Rolls',
+    name: 'Vegetarian Rolls',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/6.PNG',
     ingredients: [allIngredietnts[24], allIngredietnts[7], allIngredietnts[16], allIngredietnts[22]],
     countIngre: [1, 2, 1, 3],
+    favo: 45,
     servings: 4,
     time: 30,
     calo: '120',
@@ -107,9 +113,10 @@ final allRecipes = <Recipe>[
     id: 7,
     name: 'Teriyaki Chicken',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/7.PNG',
     ingredients: [allIngredietnts[25], allIngredietnts[15], allIngredietnts[11], allIngredietnts[16]],
     countIngre: [1, 2, 1, 4],
+    favo: 80,
     servings: 2,
     time: 10,
     instructions: [
@@ -122,11 +129,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 8,
-    name: 'Vermicelli Sauce and Pork',
+    name: 'Vermicelli Pork',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/8.PNG',
     ingredients: [allIngredietnts[28], allIngredietnts[14], allIngredietnts[16], allIngredietnts[22]],
     countIngre: [3, 2, 2, 1],
+    favo: 90,
     servings: 5,
     time: 60,
     instructions: [
@@ -142,9 +150,10 @@ final allRecipes = <Recipe>[
     id: 9,
     name: 'Low-Carb Broccoli',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/9.PNG',
     ingredients: [allIngredietnts[9], allIngredietnts[0], allIngredietnts[16], allIngredietnts[7]],
     countIngre: [1, 2, 1, 3],
+    favo: 39,
     servings: 4,
     time: 30,
     calo: '120',
@@ -156,11 +165,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 10,
-    name: 'Strawberry Daiquiri Honey',
+    name: 'Strawberry Honey',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/10.PNG',
     ingredients: [allIngredietnts[1], allIngredietnts[7], allIngredietnts[8], allIngredietnts[5]],
     countIngre: [1, 2, 1, 4],
+    favo: 78,
     servings: 2,
     time: 10,
     instructions: [
@@ -173,11 +183,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 11,
-    name: 'Coconut Mango Overnight',
+    name: 'Coconut Mango',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/11.PNG',
     ingredients: [allIngredietnts[5], allIngredietnts[3], allIngredietnts[7], allIngredietnts[23]],
     countIngre: [3, 2, 2, 1],
+    favo: 70,
     servings: 5,
     time: 60,
     instructions: [
@@ -191,11 +202,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 12,
-    name: 'Mango Banana Breakfast',
+    name: 'Mango Banana',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/12.PNG',
     ingredients: [allIngredietnts[4], allIngredietnts[7], allIngredietnts[3], allIngredietnts[5]],
     countIngre: [1, 2, 1, 3],
+    favo: 12,
     servings: 4,
     time: 30,
     calo: '120',
@@ -209,9 +221,10 @@ final allRecipes = <Recipe>[
     id: 13,
     name: 'Chicken Salad',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/13.PNG',
     ingredients: [allIngredietnts[25], allIngredietnts[1], allIngredietnts[11], allIngredietnts[23]],
     countIngre: [1, 2, 1, 4],
+    favo: 112,
     servings: 2,
     time: 10,
     instructions: [
@@ -224,11 +237,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 14,
-    name: 'Baked Coconut Rice',
+    name: 'Baked Rice',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/14.PNG',
     ingredients: [allIngredietnts[5], allIngredietnts[22], allIngredietnts[24], allIngredietnts[17]],
     countIngre: [3, 2, 2, 1],
+    favo: 10,
     servings: 5,
     time: 60,
     instructions: [
@@ -242,11 +256,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 15,
-    name: 'Chicken Fried Rice',
+    name: 'Chicken Fried',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/15.PNG',
     ingredients: [allIngredietnts[25], allIngredietnts[22], allIngredietnts[7], allIngredietnts[8]],
     countIngre: [1, 2, 1, 3],
+    favo: 71,
     servings: 4,
     time: 30,
     calo: '120',
@@ -258,11 +273,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 16,
-    name: 'Feta Oatmeal Bowl',
+    name: 'Feta Oatmeal',
     urlImage:
-    'assets/images/home/img01.png',
+    'assets/images/search01/recipes/16.PNG',
     ingredients: [allIngredietnts[24], allIngredietnts[22], allIngredietnts[27], allIngredietnts[11]],
     countIngre: [1, 2, 1, 4],
+    favo: 10,
     servings: 2,
     time: 10,
     instructions: [
@@ -275,11 +291,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 17,
-    name: 'Honey Mustard Pork',
+    name: 'Honey Pork',
     urlImage:
-    'assets/images/home/img02.png',
+    'assets/images/search01/recipes/17.PNG',
     ingredients: [allIngredietnts[7], allIngredietnts[27], allIngredietnts[8], allIngredietnts[0]],
     countIngre: [3, 2, 2, 1],
+    favo: 10,
     servings: 5,
     time: 60,
     instructions: [
@@ -293,11 +310,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 18,
-    name: 'Spinach and Pesto Salmon',
+    name: 'Spinach Salmon',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/18.PNG',
     ingredients: [allIngredietnts[28], allIngredietnts[23], allIngredietnts[16], allIngredietnts[13]],
     countIngre: [1, 2, 1, 3],
+    favo: 16,
     servings: 4,
     time: 30,
     calo: '120',
@@ -309,11 +327,12 @@ final allRecipes = <Recipe>[
   ),
   Recipe(
     id: 19,
-    name: 'Coffee Coconut Shrimp',
+    name: 'Coffee Shrimp',
     urlImage:
-    'assets/images/home/img03.png',
+    'assets/images/search01/recipes/19.PNG',
     ingredients: [allIngredietnts[8], allIngredietnts[5], allIngredietnts[29], allIngredietnts[0]],
     countIngre: [1, 2, 1, 3],
+    favo: 16,
     servings: 4,
     time: 30,
     calo: '120',
