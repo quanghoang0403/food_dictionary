@@ -216,7 +216,7 @@ class _DetailIngredientState extends State<DetailIngredient> {
         child: Row(
           children: [
             Icon(
-              Icons.health_and_safety_rounded,
+              Icons.favorite,
               size: 25,
               color: AppColors.cor1,
             ),

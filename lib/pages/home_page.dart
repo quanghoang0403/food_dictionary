@@ -34,8 +34,22 @@ class HomePageState extends State<HomePage> {
     allIngredietnts[4],
     allIngredietnts[17],
   ];
-  List<Recipe> happy_mother_day_recipes = [allRecipes[14], allRecipes[2], allRecipes[4], allRecipes[6], allRecipes[12], allRecipes[17]];
-  List<Recipe> healthy_recipes = [allRecipes[13], allRecipes[8], allRecipes[4], allRecipes[5], allRecipes[3], allRecipes[11]];
+  List<Recipe> happy_mother_day_recipes = [
+    allRecipes[14],
+    allRecipes[2],
+    allRecipes[4],
+    allRecipes[6],
+    allRecipes[12],
+    allRecipes[17]
+  ];
+  List<Recipe> healthy_recipes = [
+    allRecipes[13],
+    allRecipes[8],
+    allRecipes[4],
+    allRecipes[5],
+    allRecipes[3],
+    allRecipes[11]
+  ];
   List<Recipe> top_trending_recipes;
   String query = '';
 
@@ -50,6 +64,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController();
     List<Recipe> Recipes = allRecipes;
     //Stream<DocumentSnapshot> snapshot =  FirebaseFirestore.instance.collection("users").doc('SO78wxSqJlg0yWu6U2ca').snapshots();
     //final CollectionReference collectionReference = FirebaseFirestore.instance.collection('plants');
@@ -163,22 +178,47 @@ class HomePageState extends State<HomePage> {
                       left: 0,
                       right: 0,
                       child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          children: <Widget>[
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(children: <Widget>[
                             Expanded(
-                              child: SearchWidget(
-                                text: query,
-                                hintText: "Search recipe or ingredient",
-                                onChanged: searchIngredient,
+                              child: Container(
+                                height: 55,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color:
+                                          AppColors.lightGray.withOpacity(0.5),
+                                    )),
+                                child: GestureDetector(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.search, color: AppColors.cor2),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Search ingredient or recipe",
+                                        style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.8),
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    showSearch(
+                                        context: context,
+                                        delegate: DataSearch());
+                                  },
+                                ),
                               ),
                             ),
-                            // SvgPicture.asset("assets/icons/search.svg"),
-                          ],
-                        ),
-                      ),
+                          ])),
                     ),
+                    // SvgPicture.asset("assets/icons/search.svg"),
                   ],
                 ),
               ),
@@ -254,8 +294,8 @@ class HomePageState extends State<HomePage> {
                             lastPage: 0,
                           );
                         }
-                      // }));},
-                    ),
+                        // }));},
+                        ),
                   )),
               Padding(
                 padding: EdgeInsets.only(top: 5),
@@ -279,8 +319,8 @@ class HomePageState extends State<HomePage> {
                             lastPage: 0,
                           );
                         }
-                      // }));},
-                    ),
+                        // }));},
+                        ),
                   )),
             ],
           )),
@@ -324,5 +364,213 @@ class HomePageState extends State<HomePage> {
     setState(() {
       this.top_trending_recipes = top_trending_recipes;
     });
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  List<Ingredient> ingredients;
+  List<Recipe> recipes;
+  List<Ingredient> suggest_ingredients;
+  List<Recipe> suggest_recipes;
+  final String searchFieldLabel = "Search recipe or ingredient";
+
+  @override
+  Widget TextField(searchFieldLabel) {
+    return (TextField(searchFieldLabel));
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = "";
+        },
+        icon: Icon(
+          Icons.clear,
+          size: 25,
+          color: AppColors.cor2,
+        ),
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(
+        Icons.arrow_back_ios,
+        size: 25,
+        color: AppColors.cor2,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final ingredients = allIngredietnts.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    final recipes = allRecipes.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    if (ingredients.length>0 ){
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                padding: EdgeInsets.only(top: 10),
+                height: 145,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: ingredients.length,
+                      itemBuilder: (context, index) {
+                        final ingredient = ingredients[index];
+                        return TempIngredient(
+                          ingredient: ingredient,
+                          lastPage: 0,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),
+
+            Container(
+                padding: EdgeInsets.all(3),
+                height: 220,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recipes.length,
+                      itemBuilder: (context, index) {
+                        final recipe = recipes[index];
+                        return TempRecipe(
+                          recipe: recipe,
+                          lastPage: 0,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),
+          ],
+        ),
+      );
+    }
+    else if (recipes.length>0 ){
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+            Container(
+                padding: EdgeInsets.only(top: 10),
+                height: 220,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recipes.length,
+                      itemBuilder: (context, index) {
+                        final recipe = recipes[index];
+                        return TempRecipe(
+                          recipe: recipe,
+                          lastPage: 0,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),
+
+            Container(
+                padding: EdgeInsets.all(3),
+                height: 145,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: ingredients.length,
+                      itemBuilder: (context, index) {
+                        final ingredient = ingredients[index];
+                        return TempIngredient(
+                          ingredient: ingredient,
+                          lastPage: 0,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),
+          ],
+        ),
+      );
+    }
+    return Container(margin: EdgeInsets.only(top: 20, left: 100),
+    child:BasicText(text: "No result can found"),);
+  }
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggest_ingredients = allIngredietnts.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    final suggest_recipes = allRecipes.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+              padding: EdgeInsets.only(top: 10),
+              height: 145,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: suggest_ingredients.length,
+                    itemBuilder: (context, index) {
+                      final ingredient = suggest_ingredients[index];
+                      return TempIngredient(
+                        ingredient: ingredient,
+                        lastPage: 0,
+                      );
+                    }
+                  // }));},
+                ),
+              )),
+          Container(
+              padding: EdgeInsets.all(3),
+              height: 220,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: suggest_recipes.length,
+                    itemBuilder: (context, index) {
+                      final recipe = suggest_recipes[index];
+                      return TempRecipe(
+                        recipe: recipe,
+                        lastPage: 0,
+                      );
+                    }
+                  // }));},
+                ),
+              )),
+        ],
+      ),
+    );
   }
 }

@@ -146,10 +146,10 @@ class TempIngredient extends StatelessWidget {
           children: [
             SizedBox(
               width: 120,
-              height: 112,
+              height: 105,
               child: Image.asset(ingredient.urlImage),
             ),
-            BasicText(text: (ingredient.name), size: 18, fontWeight: FontWeight.w500),
+            BasicText(text: (ingredient.name), size: 16, fontWeight: FontWeight.w500),
             // Divider(
             //   height: 1,
             //   thickness: 0.3,

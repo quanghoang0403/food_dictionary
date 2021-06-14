@@ -53,15 +53,50 @@ class Search01State extends State<Search01> {
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(top: 7, bottom: 17),
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: SearchWidget(
-                        text: query,
-                        hintText: "Search ingredient",
-                        onChanged: searchIngredient,
-                      ),
+                      child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                height: 55,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color:
+                                      AppColors.lightGray.withOpacity(0.5),
+                                    )),
+                                child: GestureDetector(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.search, color: AppColors.cor2),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Search ingredient",
+                                        style: TextStyle(
+                                            color:
+                                            Colors.black.withOpacity(0.8),
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    showSearch(
+                                        context: context,
+                                        delegate: DataSearch());
+                                  },
+                                ),
+                              ),
+                            ),
+                          ])),
                     ),
                     // SvgPicture.asset("assets/icons/search.svg"),
                   ],
@@ -250,5 +285,119 @@ class Search01State extends State<Search01> {
       this.query = query;
       this.ingredients = ingredients;
     });
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  List<Ingredient> ingredients;
+  List<Ingredient> suggest_ingredients;
+  final String searchFieldLabel = "Search ingredient";
+
+  @override
+  Widget TextField(searchFieldLabel) {
+    return (TextField(searchFieldLabel));
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = "";
+        },
+        icon: Icon(
+          Icons.clear,
+          size: 25,
+          color: AppColors.cor2,
+        ),
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(
+        Icons.arrow_back_ios,
+        size: 25,
+        color: AppColors.cor2,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final ingredients = allIngredietnts.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    if (ingredients.length>0 ){
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 10),
+                height: 145,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: ingredients.length,
+                      itemBuilder: (context, index) {
+                        final ingredient = ingredients[index];
+                        return TempIngredient(
+                          ingredient: ingredient,
+                          lastPage: 1,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),
+          ],
+        ),
+      );
+    }
+    return Container(margin: EdgeInsets.only(top: 20, left: 100),
+      child:BasicText(text: "No result can found"),);
+  }
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggest_ingredients = allIngredietnts.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 40),
+              padding: EdgeInsets.only(top: 10),
+              height: 145,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: suggest_ingredients.length,
+                    itemBuilder: (context, index) {
+                      final ingredient = suggest_ingredients[index];
+                      return TempIngredient(
+                        ingredient: ingredient,
+                        lastPage: 1,
+                      );
+                    }
+                  // }));},
+                ),
+              )),
+        ],
+      ),
+    );
   }
 }

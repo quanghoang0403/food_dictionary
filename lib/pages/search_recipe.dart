@@ -43,15 +43,50 @@ class _Search02State extends State<Search02> {
               Container(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(top: 7, bottom: 20),
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      child: SearchWidget(
-                        text: query,
-                        hintText: "Search recipe",
-                        onChanged: searchRecipe,
-                      ),
+                      child: Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Row(children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                height: 55,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 25, vertical: 5),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(50),
+                                    border: Border.all(
+                                      color:
+                                      AppColors.lightGray.withOpacity(0.5),
+                                    )),
+                                child: GestureDetector(
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.search, color: AppColors.cor2),
+                                      SizedBox(width: 10),
+                                      Text(
+                                        "Search recipe",
+                                        style: TextStyle(
+                                            color:
+                                            Colors.black.withOpacity(0.8),
+                                            fontSize: 18),
+                                      ),
+                                    ],
+                                  ),
+                                  onTap: () {
+                                    showSearch(
+                                        context: context,
+                                        delegate: DataSearch());
+                                  },
+                                ),
+                              ),
+                            ),
+                          ])),
                     ),
                     // SvgPicture.asset("assets/icons/search.svg"),
                   ],
@@ -188,5 +223,116 @@ class _Search02State extends State<Search02> {
       this.query = query;
       this.recipes = recipes;
     });
+  }
+}
+class DataSearch extends SearchDelegate<String> {
+  List<Recipe> recipes;
+  List<Recipe> suggest_recipes;
+  final String searchFieldLabel = "Search recipe";
+
+  @override
+  Widget TextField(searchFieldLabel) {
+    return (TextField(searchFieldLabel));
+  }
+
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        onPressed: () {
+          query = "";
+        },
+        icon: Icon(
+          Icons.clear,
+          size: 25,
+          color: AppColors.cor2,
+        ),
+      )
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        close(context, null);
+      },
+      icon: Icon(
+        Icons.arrow_back_ios,
+        size: 25,
+        color: AppColors.cor2,
+      ),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    final recipes = allRecipes.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    if (recipes.length>0 ){
+      return SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: EdgeInsets.only(top: 40),
+                padding: EdgeInsets.only(top: 10),
+                height: 220,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: recipes.length,
+                      itemBuilder: (context, index) {
+                        final recipe = recipes[index];
+                        return TempRecipe(
+                          recipe: recipe,
+                          lastPage: 2,
+                        );
+                      }
+                    // }));},
+                  ),
+                )),]
+      ));
+    }
+    return Container(margin: EdgeInsets.only(top: 20, left: 100),
+      child:BasicText(text: "No result can found"),);
+  }
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggest_recipes = allRecipes.where((item) {
+      final titleLower = item.name.toLowerCase();
+      final searchLower = query.toLowerCase();
+      return (titleLower.contains(searchLower));
+    }).toList();
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 40),
+              padding: EdgeInsets.all(3),
+              height: 220,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: suggest_recipes.length,
+                    itemBuilder: (context, index) {
+                      final recipe = suggest_recipes[index];
+                      return TempRecipe(
+                        recipe: recipe,
+                        lastPage: 2,
+                      );
+                    }
+                  // }));},
+                ),
+              )),
+        ],
+      ),
+    );
   }
 }
