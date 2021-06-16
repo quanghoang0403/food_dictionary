@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
-import 'package:food_dictionary/pages/search_ingredient.dart';
-import 'package:food_dictionary/pages/search_page.dart';
+import 'package:food_dictionary/pages/search_ingredient_page.dart';
 import 'package:food_dictionary/widgets/search_box.dart';
 import 'package:food_dictionary/widgets/tempFood.dart';
 import 'package:food_dictionary/model/recipe.dart';
@@ -15,7 +14,7 @@ class DetailIngredient extends StatefulWidget {
   Ingredient ingredient;
   int lastPage;
   List<Recipe> relate_recipes;
-  String  query;
+  String query;
 
   DetailIngredient({@required this.ingredient, @required this.lastPage});
 
@@ -28,11 +27,13 @@ class _DetailIngredientState extends State<DetailIngredient> {
   Ingredient ingredient;
   int lastPage;
   List<Recipe> relate_recipes;
+
   _DetailIngredientState({@required this.ingredient, @required this.lastPage});
+
   @override
   void initState() {
     super.initState();
-    String  query = ingredient.name;
+    String query = ingredient.name;
     searchRecipe(query);
     // Size size = MediaQuery.of(context).size;
   }
@@ -172,29 +173,63 @@ class _DetailIngredientState extends State<DetailIngredient> {
       ),
       DataTable(
         columns: <DataColumn>[
-          DataColumn(label: BasicText(text: "Calories", size: 17, color: Colors.black.withOpacity(0.8))),
-          DataColumn(label: BasicText(text: ingredient.calo, size: 17, color: Colors.black.withOpacity(0.8))),
+          DataColumn(
+              label: BasicText(
+                  text: "Calories",
+                  size: 17,
+                  color: Colors.black.withOpacity(0.8))),
+          DataColumn(
+              label: BasicText(
+                  text: ingredient.calo,
+                  size: 17,
+                  color: Colors.black.withOpacity(0.8))),
         ],
         rows: <DataRow>[
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Fat", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: ingredient.fat, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Fat", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: ingredient.fat,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Sodium", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: ingredient.sodium, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Sodium",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: ingredient.sodium,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Carbohydrate", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: ingredient.carbo, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Carbohydrate",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: ingredient.carbo,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Fiber", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: ingredient.fiber, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Fiber", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: ingredient.fiber,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Sugars", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: ingredient.sugar, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Sugars",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: ingredient.sugar,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ])
         ],
       )
@@ -202,12 +237,27 @@ class _DetailIngredientState extends State<DetailIngredient> {
   }
 
   Widget HealthBenifit() {
-    return ListView.builder(
-        itemCount: ingredient.healthBenifit.length,
-        itemBuilder: (context, index) {
-          final beni = ingredient.healthBenifit[index];
-          return (BuildBenifit(beni));
-        });
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Center(
+              child: Image(
+            image: AssetImage("assets/images/search01/health_beni.png"),
+            height: 160,
+            width: 150,
+            fit: BoxFit.cover,
+          )),
+          Container(
+              height: 300,
+              child: ListView.builder(
+                  itemCount: ingredient.healthBenifit.length,
+                  itemBuilder: (context, index) {
+                    final beni = ingredient.healthBenifit[index];
+                    return (BuildBenifit(beni));
+                  }))
+        ],
+      ),
+    );
   }
 
   Widget BuildBenifit(String beni) {
@@ -221,8 +271,9 @@ class _DetailIngredientState extends State<DetailIngredient> {
               color: AppColors.cor1,
             ),
             Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: BasicText(text: beni, color: Colors.black.withOpacity(0.8), size: 18))
+                padding: EdgeInsets.only(left: 15),
+                child: BasicText(
+                    text: beni, color: Colors.black.withOpacity(0.8), size: 18))
           ],
         ));
   }
@@ -239,27 +290,28 @@ class _DetailIngredientState extends State<DetailIngredient> {
           ),
         ),
         Container(
-            padding: EdgeInsets.all(3),
-            height: 220,
             child: Align(
-              alignment: Alignment.centerRight,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: relate_recipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = relate_recipes[index];
-                    return TempRecipe(
-                      recipe: recipe,
-                      lastPage: 0,
-                    );
-                  }
-                // }));},
-              ),
-            )),
+          alignment: Alignment.centerRight,
+          child: GridView.count(
+              crossAxisCount: 2,
+              scrollDirection: Axis.vertical,
+              padding: EdgeInsets.only(bottom: 10, left: 5, right: 20),
+              shrinkWrap: true,
+              primary: false,
+              crossAxisSpacing: 0,
+              mainAxisSpacing: 0,
+              children: List.generate(relate_recipes.length, (index) {
+                final item = relate_recipes[index];
+                return TempRecipe(
+                  recipe: item,
+                  lastPage: 0,
+                );
+              })),
+        )),
       ],
-
     );
   }
+
   void searchRecipe(String query) async {
     final relate_recipes = allRecipes.where((item) {
       final titleLower = item.name.toLowerCase();
@@ -287,7 +339,6 @@ class MyDelegate extends SliverPersistentHeaderDelegate {
       child: tabBar,
     );
   }
-
 
   @override
   double get maxExtent => tabBar.preferredSize.height;

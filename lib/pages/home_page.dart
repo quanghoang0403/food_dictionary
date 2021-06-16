@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_dictionary/pages/detail_recipe.dart';
+import 'package:food_dictionary/pages/detail_recipe_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/provider/google_sign_in.dart';
@@ -11,6 +11,7 @@ import 'package:food_dictionary/widgets/style.dart';
 import 'package:food_dictionary/widgets/tempFood.dart';
 import 'package:food_dictionary/provider/cloud_firestore.dart';
 import 'package:food_dictionary/widgets/search_box.dart';
+import 'package:food_dictionary/widgets/custom_shape_clipper.dart';
 
 //import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_dictionary/data/recipe_data.dart';
@@ -71,8 +72,21 @@ class HomePageState extends State<HomePage> {
 
     //final user = FirebaseAuth.instance.currentUser;
     Size size = MediaQuery.of(context).size;
+    // return Stack(
+    //         children: <Widget>[
+    //     ClipPath(
+    //     clipper: CustomShapeClipper(),
+    //     child:
+    //     Container(
+    //         height: 300.0,
+    //         decoration: BoxDecoration(
+    //           gradient: LinearGradient(
+    //             colors: [AppColors.cor2, Colors.amber],
+    //           ),
+    //         ),
+    //     )),]
+    // );
     return Scaffold(
-      backgroundColor: Colors.white,
       body: ListView(
         children: [
           SingleChildScrollView(
@@ -80,25 +94,37 @@ class HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                // margin: EdgeInsets.only(bottom: 5),
                 // It will cover 20% of our total height
-                height: size.height * 0.17,
+                // height: size.height * 0.17,
                 child: Stack(
                   children: <Widget>[
-                    Container(
-                      padding: EdgeInsets.only(
-                        left: 20.0,
-                        right: 20.0,
-                        bottom: 40,
-                      ),
-                      height: size.height * 0.17 - 27,
-                      decoration: BoxDecoration(
-                        color: AppColors.cor2,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(60),
-                          bottomRight: Radius.circular(60),
-                        ),
-                      ),
+                    ClipPath(
+                        clipper: CustomShapeClipper(),
+                        child: Container(
+                          height: 190.0,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [ AppColors.cor2, Colors.amber[600]],
+                            ),
+                          ),
+                        )),
+                    Positioned(
+                      top: 15,
+                      left: 30,
+                      // padding: EdgeInsets.only(
+                      //   left: 20.0,
+                      //   right: 20.0,
+                      //   bottom: 40,
+                      // ),
+                      // height: size.height * 0.17 - 27,
+                      // decoration: BoxDecoration(
+                      //   color: AppColors.cor2,
+                      //   borderRadius: BorderRadius.only(
+                      //     bottomLeft: Radius.circular(60),
+                      //     bottomRight: Radius.circular(60),
+                      //   ),
+                      // ),
                       // Row(
                       //   children: <Widget>[
                       //     // FutureBuilder<DocumentSnapshot> (
@@ -158,23 +184,20 @@ class HomePageState extends State<HomePage> {
                       //         ])
                       //   ],
                       // ),
-                      child: Row(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Text(
-                            'Hi em!',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline5
-                                .copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
+                          PrimaryText(
+                            text: 'Hi em!',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            size: 20,
                           ),
-                          Spacer(),
                         ],
                       ),
                     ),
                     Positioned(
-                      bottom: 10,
+                      top: 60,
                       left: 0,
                       right: 0,
                       child: Container(
@@ -218,12 +241,11 @@ class HomePageState extends State<HomePage> {
                             ),
                           ])),
                     ),
-                    // SvgPicture.asset("assets/icons/search.svg"),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 0),
                 child: TextForPromoButton(
                   title: 'Top Trending',
                   press: () {},
@@ -248,15 +270,15 @@ class HomePageState extends State<HomePage> {
                         ),
                   )),
               Padding(
-                padding: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 0),
                 child: TextForPromoButton(
                   title: 'Popular Ingredients',
                   press: () {},
                 ),
               ),
               Container(
-                  padding: EdgeInsets.all(3),
-                  height: 150,
+                  padding: EdgeInsets.only(bottom: 0),
+                  height: 145,
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ListView.builder(
@@ -272,6 +294,8 @@ class HomePageState extends State<HomePage> {
                         // }));},
                         ),
                   )),
+              Container(height: 15,
+              color: Colors.grey.withOpacity(0.15)),
               Padding(
                 padding: EdgeInsets.only(top: 5),
                 child: TextForPromoButton(
@@ -298,7 +322,7 @@ class HomePageState extends State<HomePage> {
                         ),
                   )),
               Padding(
-                padding: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 3),
                 child: TextForPromoButton(
                   title: 'Good for health',
                   press: () {},
@@ -421,7 +445,7 @@ class DataSearch extends SearchDelegate<String> {
       final searchLower = query.toLowerCase();
       return (titleLower.contains(searchLower));
     }).toList();
-    if (ingredients.length>0 ){
+    if (ingredients.length > 0) {
       return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -441,10 +465,9 @@ class DataSearch extends SearchDelegate<String> {
                           lastPage: 0,
                         );
                       }
-                    // }));},
-                  ),
+                      // }));},
+                      ),
                 )),
-
             Container(
                 padding: EdgeInsets.all(3),
                 height: 220,
@@ -460,19 +483,17 @@ class DataSearch extends SearchDelegate<String> {
                           lastPage: 0,
                         );
                       }
-                    // }));},
-                  ),
+                      // }));},
+                      ),
                 )),
           ],
         ),
       );
-    }
-    else if (recipes.length>0 ){
+    } else if (recipes.length > 0) {
       return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-
             Container(
                 padding: EdgeInsets.only(top: 10),
                 height: 220,
@@ -488,10 +509,9 @@ class DataSearch extends SearchDelegate<String> {
                           lastPage: 0,
                         );
                       }
-                    // }));},
-                  ),
+                      // }));},
+                      ),
                 )),
-
             Container(
                 padding: EdgeInsets.all(3),
                 height: 145,
@@ -507,16 +527,19 @@ class DataSearch extends SearchDelegate<String> {
                           lastPage: 0,
                         );
                       }
-                    // }));},
-                  ),
+                      // }));},
+                      ),
                 )),
           ],
         ),
       );
     }
-    return Container(margin: EdgeInsets.only(top: 20, left: 100),
-    child:BasicText(text: "No result can found"),);
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 100),
+      child: BasicText(text: "No result can found"),
+    );
   }
+
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggest_ingredients = allIngredietnts.where((item) {
@@ -548,8 +571,8 @@ class DataSearch extends SearchDelegate<String> {
                         lastPage: 0,
                       );
                     }
-                  // }));},
-                ),
+                    // }));},
+                    ),
               )),
           Container(
               padding: EdgeInsets.all(3),
@@ -566,8 +589,8 @@ class DataSearch extends SearchDelegate<String> {
                         lastPage: 0,
                       );
                     }
-                  // }));},
-                ),
+                    // }));},
+                    ),
               )),
         ],
       ),

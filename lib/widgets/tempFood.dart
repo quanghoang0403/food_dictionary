@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_dictionary/pages/detail_recipe.dart';
+import 'package:food_dictionary/pages/detail_recipe_page.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
 import 'package:food_dictionary/model/ingredient.dart';
 import 'package:food_dictionary/model/recipe.dart';
-import 'package:food_dictionary/pages/detail_ingredient.dart';
+import 'package:food_dictionary/pages/detail_ingredient_page.dart';
 
 class TempRecipe extends StatelessWidget {
   const TempRecipe({
@@ -28,7 +28,7 @@ class TempRecipe extends StatelessWidget {
                   DetailRecipe(recipe: recipe, lastPage: lastPage,)));
     },
         child: Container(
-          margin: EdgeInsets.only(top: 10, left: 20, bottom: 5),
+          margin: EdgeInsets.only(top: 5, left: 20),
           child: Column(children: <Widget>[
             ClipRRect(
                 borderRadius: BorderRadius.only(
@@ -78,7 +78,7 @@ class TempRecipe extends StatelessWidget {
             // Image.asset(image),
             Container(
               width: 160.0,
-              padding: EdgeInsets.only(top: 5, bottom: 5),
+              padding: EdgeInsets.only(top: 8, bottom: 8),
               alignment: Alignment.center,
               //color: AppColors.cor1,
               decoration: BoxDecoration(
@@ -135,12 +135,13 @@ class TempIngredient extends StatelessWidget {
         margin: EdgeInsets.only(left: 20, bottom: 5),
         decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 12.0,
-              )
+                offset: Offset(0, 20),
+                blurRadius: 20,
+                color: Colors.grey.withOpacity(0.15),
+              ),
             ]),
         child: Column(
           children: [

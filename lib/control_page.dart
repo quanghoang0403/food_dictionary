@@ -3,9 +3,9 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/pages/home_page.dart';
-import 'package:food_dictionary/pages/search_ingredient.dart';
-import 'package:food_dictionary/pages/search_recipe.dart';
-import 'package:food_dictionary/pages/create_from_ingre.dart';
+import 'package:food_dictionary/pages/search_ingredient_page.dart';
+import 'package:food_dictionary/pages/search_recipe_page.dart';
+import 'package:food_dictionary/pages/cook_now_page.dart';
 import 'package:food_dictionary/pages/person_page.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 

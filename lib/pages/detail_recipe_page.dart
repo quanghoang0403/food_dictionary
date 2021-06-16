@@ -5,8 +5,7 @@ import 'package:food_dictionary/data/recipe_data.dart';
 import 'package:food_dictionary/model/ingredient.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
-import 'package:food_dictionary/pages/search_page.dart';
-import 'package:food_dictionary/pages/search_recipe.dart';
+import 'package:food_dictionary/pages/search_recipe_page.dart';
 import 'package:food_dictionary/widgets/search_box.dart';
 import 'package:food_dictionary/widgets/tempFood.dart';
 import 'package:food_dictionary/model/recipe.dart';
@@ -285,19 +284,19 @@ class DetailRecipe extends StatelessWidget {
             Container(
                 alignment: Alignment.center,
                 height: 32,
-                width: 180,
+                width: 220,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: AppColors.cor1.withOpacity(0.75),
                 ),
                 child: PrimaryText(
-                  text: "Cooking time: " + recipe.time.toString(),
+                  text: "Cooking time: " + recipe.time.toString() + " min",
                   size: 19,
                   color: Colors.white,
                 ))
           ]),
           Container(
-            height: 200,
+            height: 550,
             child: Step(),
           )
         ]));
@@ -334,11 +333,21 @@ class DetailRecipe extends StatelessWidget {
         padding: EdgeInsets.only(
           left: 22,
         ),
-        child: BasicText(
-          text: 'Per: 1 serving',
-          size: 19,
-          fontWeight: FontWeight.w500,
-        ),
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Container(
+              alignment: Alignment.center,
+              height: 32,
+              width: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                color: AppColors.cor1.withOpacity(0.75),
+              ),
+              child: PrimaryText(
+                text: "Per: 1 serving",
+                size: 19,
+                color: Colors.white,
+              ))
+        ]),
       ),
       DataTable(
         columns: <DataColumn>[
@@ -363,15 +372,15 @@ class DetailRecipe extends StatelessWidget {
             DataCell(BasicText(text: recipe.Sodium, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Total_Carbohydrate", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(text: "Total Carbohydrate", size: 17, color: Colors.black.withOpacity(0.8))),
             DataCell(BasicText(text: recipe.Total_Carbohydrate, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Dietary_Fiber", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(text: "Dietary Fiber", size: 17, color: Colors.black.withOpacity(0.8))),
             DataCell(BasicText(text: recipe.Dietary_Fiber, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Total_Sugars", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(text: "Total Sugars", size: 17, color: Colors.black.withOpacity(0.8))),
             DataCell(BasicText(text: recipe.Total_Sugars, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
@@ -379,7 +388,7 @@ class DetailRecipe extends StatelessWidget {
             DataCell(BasicText(text: recipe.Protein, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Vitamin_D", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(text: "Vitamin D", size: 17, color: Colors.black.withOpacity(0.8))),
             DataCell(BasicText(text: recipe.Vitamin_D, size: 17, color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[

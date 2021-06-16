@@ -4,8 +4,8 @@ import 'package:food_dictionary/model/ingredient.dart';
 import 'package:food_dictionary/data/ingredient_data.dart';
 import 'package:food_dictionary/model/recipe.dart';
 import 'package:food_dictionary/data/recipe_data.dart';
-import 'package:food_dictionary/pages/detail_ingredient.dart';
-import 'package:food_dictionary/pages/detail_recipe.dart';
+import 'package:food_dictionary/pages/detail_ingredient_page.dart';
+import 'package:food_dictionary/pages/detail_recipe_page.dart';
 import 'package:food_dictionary/widgets/colors.dart';
 import 'package:food_dictionary/widgets/style.dart';
 import 'package:food_dictionary/widgets/search_box.dart';
@@ -17,17 +17,15 @@ class Create extends StatefulWidget {
 }
 
 class CreateState extends State<Create> {
-  List<Ingredient> ingredients;
+  List<Ingredient> ingredients = allIngredietnts;
   List<Ingredient> choosed_ingredients = [];
   List<Recipe> recipes = [];
   String query = '';
-  ListView searchView;
+ int flat2 = 0;
 
   @override
   void initState() {
     super.initState();
-    ingredients = allIngredietnts;
-    searchIngredient(query);
     searchRecipe(choosed_ingredients);
   }
 
@@ -39,19 +37,59 @@ class CreateState extends State<Create> {
               child: Column(
             children: <Widget>[
               Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.only(top: 20, bottom: 0),
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
+                height: 110,
+                child: Stack(
                   children: <Widget>[
-                    Expanded(
-                      child: SearchWidget(
-                        text: query,
-                        hintText: "What ingredient you have",
-                        onChanged: searchIngredient,
+                    Container(
+                      padding: EdgeInsets.only(
+                        left: 20.0,
+                        right: 20.0,
+                        bottom: 20,
+                      ),
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: AppColors.cor2,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50),
+                        ),
                       ),
                     ),
-                    // SvgPicture.asset("assets/icons/search.svg"),
+                    Positioned(
+                      top: 10,
+                      left: 140,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          PrimaryText(
+                            text: 'Cook now!',
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                            size: 23,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      top: 50,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: SearchWidget(
+                                text: query,
+                                hintText: "What ingredient you have",
+                                onChanged: searchIngredient,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -131,21 +169,41 @@ class CreateState extends State<Create> {
                       )),
                 ),
               ),
+              Center(child: Builder(builder: (BuildContext context) {
+                if (flat2 == 0) {
+                  return Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child: Image(
+                        image: AssetImage(
+                            "assets/images/search01/cook.png"),
+                        height: 170,
+                        width: 180,
+                        fit: BoxFit.cover,
+                      ));
+                }
+                return Container(
+                  height: 5,
+                );
+              })),
               Container(
-                  padding: EdgeInsets.all(3),
-                  height: 210,
                   child: Align(
                     alignment: Alignment.centerRight,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: recipes.length,
-                      itemBuilder: (context, index) {
-                        final recipe = recipes[index];
-                        print(recipes[index]);
-                        print(recipes.length);
-                        return TempRecipe(recipe: recipe, lastPage: 3,);
-                      },
-                    ),
+                    child: GridView.count(
+                        crossAxisCount: 2,
+                        scrollDirection: Axis.vertical,
+                        padding:
+                        EdgeInsets.only(bottom: 10, left: 5, right: 20),
+                        shrinkWrap: true,
+                        primary: false,
+                        crossAxisSpacing: 0,
+                        mainAxisSpacing: 0,
+                        children: List.generate(recipes.length, (index) {
+                          final item = recipes[index];
+                          return TempRecipe(
+                            recipe: item,
+                            lastPage: 3,
+                          );
+                        })),
                   )),
             ],
           ))
@@ -163,6 +221,9 @@ class CreateState extends State<Create> {
         ingredient.choosed += 1;
         print(ingredient.choosed);
         searchIngredient(query);
+        if (choosed_ingredients.length == 0){
+          searchRecipe(choosed_ingredients);
+        }
         // Navigator.push(
         //     context,
         //     MaterialPageRoute(
@@ -235,39 +296,52 @@ class CreateState extends State<Create> {
       final flat = ingredient.choosed % 2;
       return (flat == 0);
     }).toList();
-    setState(() {
-      this.query = query;
-      this.ingredients = ingredients;
-      this.choosed_ingredients = choosed_ingredients;
-    });
+      setState(() {
+        this.query = query;
+        this.ingredients = ingredients;
+        this.choosed_ingredients = choosed_ingredients;
+      });
   }
 
   void searchRecipe(List choosed_ingredients) {
     recipes = [];
-    print("list$choosed_ingredients");
-    for (var i = 0; i < choosed_ingredients.length; i++) {
-      for (var j = 0; j < allRecipes.length; j++) {
-        for (var k = 0; k < allRecipes[j].ingredients.length; k++) {
-          if (choosed_ingredients[i].name ==
-              allRecipes[j].ingredients[k].name) {
-            var flat = 0;
-            for (var check = 0; check < recipes.length; check++) {
-              if (allRecipes[j].name == recipes[check].name) {
-                flat = 1;
+    if (choosed_ingredients.length>0){
+      for (var i = 0; i < choosed_ingredients.length; i++) {
+        for (var j = 0; j < allRecipes.length; j++) {
+          for (var k = 0; k < allRecipes[j].ingredients.length; k++) {
+            if (choosed_ingredients[i].name ==
+                allRecipes[j].ingredients[k].name) {
+              var flat = 0;
+              for (var check = 0; check < recipes.length; check++) {
+                if (allRecipes[j].name == recipes[check].name) {
+                  flat = 1;
+                }
+                ;
+              }
+              if (flat == 0) {
+                recipes.add(allRecipes[j]);
               }
               ;
             }
-            if (flat == 0) {
-              recipes.add(allRecipes[j]);
-            }
-            ;
           }
         }
       }
+    } else
+      {
+        recipes = [];
+      }
+    if (recipes.length > 0) {
+      setState(() {
+        this.query = query;
+        this.recipes = recipes;
+        this.flat2 = 1;
+      });
+    } else {
+      setState(() {
+        this.query = query;
+        this.recipes = [];
+        this.flat2 = 0;
+      });
     }
-    setState(() {
-      this.recipes = recipes;
-    });
-    print("recipe $recipes");
   }
 }
