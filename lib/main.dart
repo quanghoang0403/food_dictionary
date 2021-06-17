@@ -25,6 +25,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:food_dictionary/control_page.dart';
 import 'package:food_dictionary/pages/splash_page.dart';
 
 Future main() async {
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
         routes: <String, WidgetBuilder>{
           //'/HomeScreen': (BuildContext context) => IntroScreen(),
         },
-        home: SplashPage(),
+        //home: SplashPage(),
+        home: ControlPage(lastPage: 0,),
       );
 }
 
