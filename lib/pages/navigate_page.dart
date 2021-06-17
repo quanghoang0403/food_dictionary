@@ -16,11 +16,11 @@ class NavigatePage extends StatelessWidget {
           child: StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
             builder: (context, snapshot) {
-              return IntroPage();
-              return ControlPage();
+              //return IntroPage();
+              //return ControlPage();
               final provider = Provider.of<GoogleSignInProvider>(context);
               if (snapshot.hasData) {
-                return ControlPage();
+                return ControlPage(lastPage: 0,);
               } else {
                 return IntroPage();
               }

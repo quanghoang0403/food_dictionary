@@ -67,10 +67,8 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final controller = TextEditingController();
     List<Recipe> Recipes = allRecipes;
-    //Stream<DocumentSnapshot> snapshot =  FirebaseFirestore.instance.collection("users").doc('SO78wxSqJlg0yWu6U2ca').snapshots();
-    //final CollectionReference collectionReference = FirebaseFirestore.instance.collection('plants');
 
-    //final user = FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
     Size size = MediaQuery.of(context).size;
     // return Stack(
     //         children: <Widget>[
@@ -188,7 +186,7 @@ class HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           PrimaryText(
-                            text: 'Hi em!',
+                            text: 'Hi '+ user.displayName +'!',
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
                             size: 20,
