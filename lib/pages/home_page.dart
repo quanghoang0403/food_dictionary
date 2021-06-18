@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:food_dictionary/pages/detail_recipe_page.dart';
+import 'package:food_dictionary/pages/show_more_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_dictionary/provider/google_sign_in.dart';
@@ -28,10 +28,10 @@ class HomePageState extends State<HomePage> {
   List<Ingredient> ingredients;
   List<Ingredient> choosed_ingrdients = allIngredietnts;
   List<Ingredient> popular_ingredients = [
-    allIngredietnts[0],
+    allIngredietnts[9],
     allIngredietnts[5],
-    allIngredietnts[10],
-    allIngredietnts[2],
+    allIngredietnts[25],
+    allIngredietnts[8],
     allIngredietnts[4],
     allIngredietnts[17],
   ];
@@ -104,7 +104,7 @@ class HomePageState extends State<HomePage> {
                           height: 190.0,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [ AppColors.cor2, Colors.amber[600]],
+                              colors: [AppColors.cor2, Colors.amber[600]],
                             ),
                           ),
                         )),
@@ -248,7 +248,13 @@ class HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(top: 0),
                 child: TextForPromoButton(
                   title: 'Top Trending',
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShowMoreRecipe(list: top_trending_recipes, lastPage: 0,  name: 'Top Trending')));
+                  },
                 ),
               ),
               Container(
@@ -273,7 +279,13 @@ class HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(top: 0),
                 child: TextForPromoButton(
                   title: 'Popular Ingredients',
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShowMoreIngredient(list: popular_ingredients, lastPage: 0,  name: 'Popular Ingredients')));
+                  },
                 ),
               ),
               Container(
@@ -294,13 +306,18 @@ class HomePageState extends State<HomePage> {
                         // }));},
                         ),
                   )),
-              Container(height: 15,
-              color: Colors.grey.withOpacity(0.15)),
+              Container(height: 15, color: Colors.grey.withOpacity(0.15)),
               Padding(
                 padding: EdgeInsets.only(top: 5),
                 child: TextForPromoButton(
                   title: 'Happy Mother day',
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShowMoreRecipe(list: happy_mother_day_recipes, lastPage: 0,  name: 'Happy Mother day')));
+                  },
                 ),
               ),
               Container(
@@ -325,7 +342,13 @@ class HomePageState extends State<HomePage> {
                 padding: EdgeInsets.only(top: 3),
                 child: TextForPromoButton(
                   title: 'Good for health',
-                  press: () {},
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ShowMoreRecipe(list: healthy_recipes, lastPage: 0,  name: 'Good for health')));
+                  },
                 ),
               ),
               Container(
@@ -449,9 +472,19 @@ class DataSearch extends SearchDelegate<String> {
       return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-                padding: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 10, left: 20),
+              child: PrimaryText(
+                text: 'Ingredients',
+                color: AppColors.cor1,
+                fontWeight: FontWeight.w500,
+                size: 22,
+              ),
+            ),
+            Container(
+                padding: EdgeInsets.only(top: 5),
                 height: 145,
                 child: Align(
                   alignment: Alignment.centerRight,
@@ -469,66 +502,71 @@ class DataSearch extends SearchDelegate<String> {
                       ),
                 )),
             Container(
-                padding: EdgeInsets.all(3),
-                height: 220,
+              margin: EdgeInsets.only(top: 10, left: 20),
+              child: PrimaryText(
+                text: 'Recipes',
+                color: AppColors.cor1,
+                fontWeight: FontWeight.w500,
+                size: 22,
+              ),
+            ),
+            Container(
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: recipes.length,
-                      itemBuilder: (context, index) {
-                        final recipe = recipes[index];
+                  child: GridView.count(
+                      crossAxisCount: 2,
+                      scrollDirection: Axis.vertical,
+                      padding:
+                      EdgeInsets.only(bottom: 10, left: 5, right: 20),
+                      shrinkWrap: true,
+                      primary: false,
+                      crossAxisSpacing: 0,
+                      mainAxisSpacing: 0,
+                      children: List.generate(recipes.length, (index) {
+                        final item = recipes[index];
                         return TempRecipe(
-                          recipe: recipe,
+                          recipe: item,
                           lastPage: 0,
                         );
-                      }
-                      // }));},
-                      ),
+                      })),
                 )),
           ],
         ),
       );
-    } else if (recipes.length > 0) {
+    } else if (ingredients.length == 0) {
       return SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                padding: EdgeInsets.only(top: 10),
-                height: 220,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: recipes.length,
-                      itemBuilder: (context, index) {
-                        final recipe = recipes[index];
-                        return TempRecipe(
-                          recipe: recipe,
-                          lastPage: 0,
-                        );
-                      }
-                      // }));},
-                      ),
-                )),
+              margin: EdgeInsets.only(top: 10, left: 30),
+              child: PrimaryText(
+                text: 'Recipes',
+                color: AppColors.cor1,
+                fontWeight: FontWeight.w500,
+                size: 22,
+              ),
+            ),
             Container(
-                padding: EdgeInsets.all(3),
-                height: 145,
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: ingredients.length,
-                      itemBuilder: (context, index) {
-                        final ingredient = ingredients[index];
-                        return TempIngredient(
-                          ingredient: ingredient,
+                  child: GridView.count(
+                      crossAxisCount: 2,
+                      scrollDirection: Axis.vertical,
+                      padding:
+                      EdgeInsets.only(bottom: 10, left: 5, right: 20),
+                      shrinkWrap: true,
+                      primary: false,
+                      crossAxisSpacing: 0,
+                      mainAxisSpacing: 0,
+                      children: List.generate(recipes.length, (index) {
+                        final item = recipes[index];
+                        return TempRecipe(
+                          recipe: item,
                           lastPage: 0,
                         );
-                      }
-                      // }));},
-                      ),
+                      })),
                 )),
           ],
         ),
@@ -576,7 +614,7 @@ class DataSearch extends SearchDelegate<String> {
               )),
           Container(
               padding: EdgeInsets.all(3),
-              height: 220,
+              height: 210,
               child: Align(
                 alignment: Alignment.centerRight,
                 child: ListView.builder(

@@ -15,19 +15,23 @@ class Search02 extends StatefulWidget {
 }
 
 class _Search02State extends State<Search02> {
-  List<bool> optionSelected = [true, false, false];
-  List<Recipe> recipes = [];
-  int flat = 0;
+  List<bool> optionSelected = [false, false, false, false];
+  List<Recipe> recipes = allRecipes;
   String query = '';
+  List<String> list_cate = [];
 
   @override
   void initState() {
     super.initState();
+    query = '';
+    searchRecipe(query);
   }
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
         body: ListView(children: [
           SingleChildScrollView(
@@ -91,36 +95,24 @@ class _Search02State extends State<Search02> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 10, left: 40, right: 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    option('Veg', 'assets/icons/salad.png', 0),
-                    option('Rice', 'assets/icons/rice.png', 1),
-                    option('Fruit', 'assets/icons/fruit.png', 2),
-                  ],
+                padding: EdgeInsets.only(top: 10),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      option('Vegan', 'assets/icons/salad.png', 0),
+                      option('Low-Carb', 'assets/icons/rice.png', 1),
+                      option('Low-Fat', 'assets/icons/fruit.png', 2),
+                      option('HCG', 'assets/icons/fruit.png', 3),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Center(child: Builder(builder: (BuildContext context) {
-                if (flat == 0) {
-                  return Padding(
-                      padding: EdgeInsets.only(top: 60),
-                      child: Image(
-                        image: AssetImage(
-                            "assets/images/search01/search_recipe.png"),
-                        height: 270,
-                        width: 270,
-                        fit: BoxFit.cover,
-                      ));
-                }
-                return Container(
-                  height: 5,
-                );
-              })),
               Container(
                   child: Align(
                     alignment: Alignment.centerRight,
@@ -134,11 +126,11 @@ class _Search02State extends State<Search02> {
                         crossAxisSpacing: 0,
                         mainAxisSpacing: 0,
                         children: List.generate(recipes.length, (index) {
-                            final item = recipes[index];
-                            return TempRecipe(
-                              recipe: item,
-                              lastPage: 2,
-                            );
+                          final item = recipes[index];
+                          return TempRecipe(
+                            recipe: item,
+                            lastPage: 2,
+                          );
                         })),
                   )),
             ]),
@@ -151,14 +143,23 @@ class _Search02State extends State<Search02> {
       onTap: () {
         setState(() {
           optionSelected[index] = !optionSelected[index];
+          if (optionSelected[index] == true) {
+            list_cate.add(name);
+          } else {
+            list_cate.remove(name);
+          }
+          searchRecipe(query);
         });
+        print(list_cate);
       },
       child: Container(
-        height: 40,
+        margin: EdgeInsets.only(left: 5, right: 5),
+        height: 48,
+        width: 75,
         decoration: BoxDecoration(
           color: optionSelected[index] ? AppColors.cor1 : Colors.white,
           borderRadius: BorderRadius.all(
-            Radius.circular(20),
+            Radius.circular(25),
           ),
           boxShadow: [
             BoxShadow(
@@ -169,28 +170,22 @@ class _Search02State extends State<Search02> {
             ),
           ],
         ),
-        padding: EdgeInsets.symmetric(
-          horizontal: 10,
-        ),
-        child: Row(
+        child: Column(
           children: [
             SizedBox(
-              height: 32,
-              width: 32,
+              height: 27,
+              width: 50,
               child: Image.asset(
                 image,
                 color: optionSelected[index] ? Colors.white : Colors.black,
               ),
-            ),
-            SizedBox(
-              width: 8,
             ),
             Text(
               "$name",
               style: TextStyle(
                 color: optionSelected[index] ? Colors.white : Colors.black,
                 fontSize: 14,
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.w400,
               ),
             )
           ],
@@ -205,18 +200,35 @@ class _Search02State extends State<Search02> {
       final searchLower = query.toLowerCase();
       return (titleLower.contains(searchLower));
     }).toList();
-    if (query.length > 0 && recipes.length > 0) {
-      setState(() {
-        this.query = query;
+    List<Recipe> tempRecipe = [];
+    for (var i = 0; i < recipes.length; i++) {
+      var count = 0;
+      var len = list_cate.length;
+      print("list: $len");
+      for (var j = 0; j< list_cate.length; j++){
+        var check = false;
+          for (var k =0; k< recipes[i].list_cate.length ; k++){
+            if (recipes[i].list_cate[k] == list_cate [j]){
+              check = true;
+            }
+          }
+        if (check == true){
+          count = count + 1;
+          print ("count $count");
+        }
+        }
+      if (count == list_cate.length)
+        {
+          tempRecipe.add(recipes[i]);
+        }
+      }
+    setState(() {
+      this.query = query;
+      if (list_cate.length>0){
+        this.recipes = tempRecipe;
+      } else {
         this.recipes = recipes;
-        this.flat = 1;
-      });
-    } else {
-      setState(() {
-        this.query = query;
-        this.recipes = [];
-        this.flat = 0;
-      });
+      }
+    });
     }
-  }
 }

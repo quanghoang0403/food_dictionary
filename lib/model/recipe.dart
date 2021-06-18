@@ -7,8 +7,10 @@ class Recipe {
   final String urlImage;
   List<Ingredient> ingredients = [];
   List<String> instructions = [];
+  List<String> list_cate = [];
   List<double>  countIngre = [];
   final int favo;
+  int favo_state = 1;
   final String calo;
   final String Total_Fat;
   final String Saturated_Fat;
@@ -30,8 +32,10 @@ class Recipe {
     this.name,
     this.urlImage,
     this.ingredients,
+    this.list_cate,
     this.countIngre,
     this.favo,
+    this.favo_state,
     this.servings,
     this.time,
     this.instructions,

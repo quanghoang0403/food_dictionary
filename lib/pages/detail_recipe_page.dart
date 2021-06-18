@@ -10,15 +10,40 @@ import 'package:food_dictionary/widgets/search_box.dart';
 import 'package:food_dictionary/widgets/tempFood.dart';
 import 'package:food_dictionary/model/recipe.dart';
 
-class DetailRecipe extends StatelessWidget {
+class DetailRecipe extends StatefulWidget {
   final Recipe recipe;
   int lastPage;
 
+  @override
   DetailRecipe({@required this.recipe, @required this.lastPage});
+
+  @override
+  _DetailRecipeState createState() =>
+      _DetailRecipeState(recipe: recipe, lastPage: lastPage);
+}
+
+class _DetailRecipeState extends State<DetailRecipe> {
+  final Recipe recipe;
+  int lastPage;
+  int new_serving;
+  IconData icon_favo;
+  int flat = 1;
+  @override
+  _DetailRecipeState({@required this.recipe, @required this.lastPage});
+
+  @override
+  void initState() {
+    super.initState();
+    new_serving = recipe.servings;
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    flat = this.recipe.favo_state % 2;
+    if (flat == 1) {
+      this.icon_favo = Icons.favorite_border_outlined;
+    } else this.icon_favo = Icons.favorite;
     // var count = recipe.ingrdients.length();
     return Scaffold(
         backgroundColor: Colors.grey[50],
@@ -57,15 +82,19 @@ class DetailRecipe extends StatelessWidget {
                               fontWeight: FontWeight.w500,
                               color: AppColors.cor2,
                             ))),
-                    Container(
-                      width: size.width - 350,
-                      padding: EdgeInsets.only(top: 5),
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: AppColors.cor2,
+                    IconButton(
+                      icon: Icon(
+                        icon_favo,
                         size: 28,
+                        color: AppColors.cor2,
                       ),
-                    )
+                      onPressed: () {
+                        setState(() {
+                          this.recipe.favo_state = this.recipe.favo_state + 1;
+                          print(this.recipe.favo_state);
+                        });
+                      },
+                    ),
                   ],
                 ),
                 // BasicText(text: "So good, bae!", size: 18),
@@ -150,19 +179,19 @@ class DetailRecipe extends StatelessWidget {
                           tabs: <Widget>[
                             Center(
                                 child: PrimaryText(
-                              text: "Ingredients",
+                              text: "Ingredient",
                               size: 19,
                               fontWeight: FontWeight.w500,
                             )),
                             Center(
                                 child: PrimaryText(
-                              text: "Instructions",
+                              text: "Instruction",
                               size: 19,
                               fontWeight: FontWeight.w500,
                             )),
                             Center(
                                 child: PrimaryText(
-                              text: "Health Score",
+                              text: "Nutrition",
                               size: 19,
                               fontWeight: FontWeight.w500,
                             )),
@@ -184,24 +213,63 @@ class DetailRecipe extends StatelessWidget {
   }
 
   Widget Ingredients() {
-    return Container(
+    return SingleChildScrollView(
         child: Column(children: [
-      Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+      Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Container(
+          height: 30,
+          alignment: Alignment.centerLeft,
+          child: FloatingActionButton(
+              elevation: 2,
+              focusColor: AppColors.cor1,
+              backgroundColor: Colors.white,
+              onPressed: () {
+                setState(() {
+                  if (new_serving > 1) {
+                    this.new_serving = this.new_serving - 1;
+                  }
+                  ;
+                });
+              },
+              child: Icon(
+                Icons.remove,
+                size: 23,
+                color: AppColors.cor1,
+              )),
+        ),
         Container(
             alignment: Alignment.center,
             height: 32,
-            width: 140,
+            width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               color: AppColors.cor1.withOpacity(0.75),
             ),
             child: PrimaryText(
-              text: "Servings: " + recipe.servings.toString(),
+              text: "Servings: " + new_serving.toString(),
               size: 19,
               color: Colors.white,
-            ))
+            )),
+        Container(
+          height: 30,
+          alignment: Alignment.centerLeft,
+          child: FloatingActionButton(
+              elevation: 2,
+              focusColor: AppColors.cor1,
+              backgroundColor: Colors.white,
+              onPressed: () {
+                setState(() {
+                  this.new_serving = this.new_serving + 1;
+                });
+              },
+              child: Icon(
+                Icons.add,
+                size: 23,
+                color: AppColors.cor1,
+              )),
+        )
       ]),
-      SizedBox(height: 5),
+      SizedBox(height: 15),
       Row(children: [
         Container(
           child: Padding(
@@ -239,7 +307,8 @@ class DetailRecipe extends StatelessWidget {
         itemBuilder: (context, index) {
           // PrimaryText(text: 'Per ' + recipe.servings.toString());
           final ingredient = recipe.ingredients[index];
-          final count = recipe.countIngre[index];
+          final count =
+              recipe.countIngre[index] * new_serving / recipe.servings;
           return Column(
             children: [
               Row(
@@ -261,9 +330,9 @@ class DetailRecipe extends StatelessWidget {
                             size: 18)),
                   ),
                   Container(
-                    width: 160,
+                    width: 180,
                     child: Padding(
-                        padding: EdgeInsets.only(left: 130),
+                        padding: EdgeInsets.only(left: 120),
                         child: BasicText(
                             text: count.toString(),
                             color: Colors.black.withOpacity(0.8),
@@ -308,22 +377,21 @@ class DetailRecipe extends StatelessWidget {
         itemBuilder: (context, index) {
           final step = recipe.instructions[index];
           return Padding(
-                padding: EdgeInsets.only(left: 20, right: 16, bottom: 10),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Row(children: [
-                      //   Icon(
-                      //     Icons.health_and_safety_rounded,
-                      //     size: 25,
-                      //     color: AppColors.cor1,
-                      //   ),
-                      BasicText(text: "Step " + (index+1).toString(), size: 18),
-                      Text(step,
-                          style: TextStyle(
-                              color: Colors.black.withOpacity(0.8),
-                              fontSize: 16))
-                    ]));
+              padding: EdgeInsets.only(left: 20, right: 16, bottom: 10),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Row(children: [
+                    //   Icon(
+                    //     Icons.health_and_safety_rounded,
+                    //     size: 25,
+                    //     color: AppColors.cor1,
+                    //   ),
+                    BasicText(text: "Step " + (index + 1).toString(), size: 18),
+                    Text(step,
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.8), fontSize: 16))
+                  ]));
         });
   }
 
@@ -331,13 +399,13 @@ class DetailRecipe extends StatelessWidget {
     return ListView(children: [
       Padding(
         padding: EdgeInsets.only(
-          left: 22,
+          left: 0,
         ),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           Container(
               alignment: Alignment.center,
               height: 32,
-              width: 150,
+              width: 140,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(16),
                 color: AppColors.cor1.withOpacity(0.75),
@@ -350,58 +418,138 @@ class DetailRecipe extends StatelessWidget {
         ]),
       ),
       DataTable(
+        horizontalMargin: 50,
+        columnSpacing: 130,
         columns: <DataColumn>[
-          DataColumn(label: BasicText(text: "Calories", size: 17, color: Colors.black.withOpacity(0.8))),
-          DataColumn(label: BasicText(text: recipe.calo, size: 17, color: Colors.black.withOpacity(0.8))),
+          DataColumn(
+              label: BasicText(
+                  text: "Calories",
+                  size: 17,
+                  color: Colors.black.withOpacity(0.8))),
+          DataColumn(
+              label: BasicText(
+                  text: recipe.calo,
+                  size: 17,
+                  color: Colors.black.withOpacity(0.8))),
         ],
         rows: <DataRow>[
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Total Fat", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Total_Fat, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Total Fat",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Total_Fat,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Saturated Fat", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Saturated_Fat, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Saturated Fat",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Saturated_Fat,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Cholesterol", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Sodium, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Cholesterol",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Sodium,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Sodium", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Sodium, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Sodium",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Sodium,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Total Carbohydrate", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Total_Carbohydrate, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Total Carbohydrate",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Total_Carbohydrate,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Dietary Fiber", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Dietary_Fiber, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Dietary Fiber",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Dietary_Fiber,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Total Sugars", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Total_Sugars, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Total Sugars",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Total_Sugars,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Protein", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Protein, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Protein",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Protein,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Vitamin D", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Vitamin_D, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Vitamin D",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Vitamin_D,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Calcium", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Calcium, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Calcium",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Calcium,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Iron", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Iron, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Iron", size: 17, color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Iron,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
           DataRow(cells: <DataCell>[
-            DataCell(BasicText(text: "Potassium", size: 17, color: Colors.black.withOpacity(0.8))),
-            DataCell(BasicText(text: recipe.Potassium, size: 17, color: Colors.black.withOpacity(0.8)))
+            DataCell(BasicText(
+                text: "Potassium",
+                size: 17,
+                color: Colors.black.withOpacity(0.8))),
+            DataCell(BasicText(
+                text: recipe.Potassium,
+                size: 17,
+                color: Colors.black.withOpacity(0.8)))
           ]),
         ],
       )

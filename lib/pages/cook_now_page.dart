@@ -172,12 +172,12 @@ class CreateState extends State<Create> {
               Center(child: Builder(builder: (BuildContext context) {
                 if (flat2 == 0) {
                   return Padding(
-                      padding: EdgeInsets.only(top: 20),
+                      padding: EdgeInsets.only(top: 25),
                       child: Image(
                         image: AssetImage(
                             "assets/images/search01/cook.png"),
-                        height: 170,
-                        width: 180,
+                        height: 185,
+                        width: 185,
                         fit: BoxFit.cover,
                       ));
                 }
@@ -321,7 +321,6 @@ class CreateState extends State<Create> {
               if (flat == 0) {
                 recipes.add(allRecipes[j]);
               }
-              ;
             }
           }
         }

@@ -1,4 +1,3 @@
-//import 'dart:html';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:food_dictionary/pages/search_recipe_page.dart';
 import 'package:food_dictionary/pages/cook_now_page.dart';
 import 'package:food_dictionary/pages/person_page.dart';
 import 'package:food_dictionary/widgets/colors.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ControlPage extends StatefulWidget {
   int lastPage = 0;
@@ -48,7 +48,7 @@ class _PageState extends State<ControlPage> {
         items: [
           Icon(Icons.visibility_outlined, size: 28, color: Colors.white),
           Icon(Icons.set_meal, size: 28, color: Colors.white),
-          Icon(Icons.room_service, size: 28, color: Colors.white),
+          FaIcon(FontAwesomeIcons.book, size: 25, color: Colors.white),
           Icon(Icons.restaurant_menu, size: 28, color: Colors.white),
           Icon(Icons.person, size: 28, color: Colors.white),
         ],

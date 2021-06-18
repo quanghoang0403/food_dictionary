@@ -1,6 +1,7 @@
 class Ingredient {
   final int id;
   final String name;
+  final String cate;
   final String per;
   final String urlImage;
   final String calo;
@@ -15,6 +16,7 @@ class Ingredient {
   Ingredient({
     this.id,
     this.name,
+    this.cate,
     this.per,
     this.urlImage,
     this.calo,

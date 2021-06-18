@@ -10,6 +10,7 @@ import 'package:food_dictionary/model/ingredient.dart';
 import 'package:food_dictionary/data/recipe_data.dart';
 import 'package:food_dictionary/control_page.dart';
 
+
 class DetailIngredient extends StatefulWidget {
   Ingredient ingredient;
   int lastPage;

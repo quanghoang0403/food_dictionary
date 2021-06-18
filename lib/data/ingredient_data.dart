@@ -19,6 +19,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 2,
     name: 'Strawberry',
+    cate: 'Fruit',
     per: '1 cup (152g)',
     urlImage:
     'assets/images/search01/ingredients/2.jpg',
@@ -34,6 +35,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 3,
     name: 'Grape',
+    cate: 'Fruit',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/3.jpg',
@@ -49,6 +51,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 4,
     name: 'Mango',
+    cate: 'Fruit',
     per: '1 mango (58g)',
     urlImage:
     'assets/images/search01/ingredients/4.jpg',
@@ -64,6 +67,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 5,
     name: 'Banana',
+    cate: 'Fruit',
     per: '1 medium banana (118 g)',
     urlImage:
     'assets/images/search01/ingredients/5.jpg',
@@ -79,6 +83,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 6,
     name: 'Coconut',
+    cate: 'Fruit',
     per: '1 piece (45g)',
     urlImage:
     'assets/images/search01/ingredients/6.jpg',
@@ -94,6 +99,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 7,
     name: 'Chocolate',
+    cate: 'Others',
     per: '1  1.4 ounce bar (41g)',
     urlImage:
     'assets/images/search01/ingredients/7.jpg',
@@ -109,6 +115,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 8,
     name: 'Honey',
+    cate: 'Others',
     per: '1 tablespoon of coffee flour',
     urlImage:
     'assets/images/search01/ingredients/8.jpg',
@@ -124,6 +131,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 9,
     name: 'Coffee',
+    cate: 'Grain, Nut',
     per: '1 tablespoon of coffee flour',
     urlImage:
     'assets/images/search01/ingredients/9.jpg',
@@ -139,6 +147,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 10,
     name: 'Broccoli',
+    cate: 'Veg',
     per: '1 cup (91g)',
     urlImage:
     'assets/images/search01/ingredients/10.jpg',
@@ -154,6 +163,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 11,
     name: 'Radish',
+    cate: 'Veg',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/11.jpg',
@@ -169,6 +179,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 12,
     name: 'Cabbage',
+    cate: 'Veg',
     per: '1 cup (72g)',
     urlImage:
     'assets/images/search01/ingredients/12.jpg',
@@ -184,6 +195,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 13,
     name: 'Mushroom',
+    cate: 'Veg',
     per: '1 cup (72g)',
     urlImage:
     'assets/images/search01/ingredients/13.jpg',
@@ -199,6 +211,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 14,
     name: 'Lettuce',
+    cate: 'Veg',
     per: '1 cup (70g)',
     urlImage:
     'assets/images/search01/ingredients/14.jpg',
@@ -214,6 +227,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 15,
     name: 'Cucumber',
+    cate: 'Veg',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/15.jpg',
@@ -229,6 +243,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 16,
     name: 'Onion',
+    cate: 'Veg',
     per: '1 cup (89g)',
     urlImage:
     'assets/images/search01/ingredients/16.jpg',
@@ -244,6 +259,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 17,
     name: 'Carrot',
+    cate: 'Veg',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/17.jpg',
@@ -259,6 +275,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 18,
     name: 'Corn',
+    cate: 'Pasta',
     per: '1 medium (6 3/4" to 7 1/2" long)',
     urlImage:
     'assets/images/search01/ingredients/18.jpg',
@@ -274,6 +291,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 19,
     name: 'Potato',
+    cate: 'Veg',
     per: '1 medium potato (130 grams)',
     urlImage:
     'assets/images/search01/ingredients/19.jpg',
@@ -289,6 +307,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 20,
     name: 'Tomato',
+    cate: 'Veg',
     per: '1 small (91g)',
     urlImage:
     'assets/images/search01/ingredients/20.jpg',
@@ -304,6 +323,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 21,
     name: 'Bell pepper',
+    cate: 'Veg',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/21.jpg',
@@ -319,6 +339,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 22,
     name: 'Pumpkin',
+    cate: 'Veg',
     per: '1 cup (245g)',
     urlImage:
     'assets/images/search01/ingredients/22.jpg',
@@ -334,6 +355,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 23,
     name: 'Rice',
+    cate: 'Pasta',
     per: '1 cup (92g)',
     urlImage:
     'assets/images/search01/ingredients/23.jpg',
@@ -349,6 +371,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 24,
     name: 'Cheese',
+    cate: 'Others',
     per: '1 slice (22g)',
     urlImage:
     'assets/images/search01/ingredients/24.jpg',
@@ -364,6 +387,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 25,
     name: 'Eggs',
+    cate: 'Egg, Milk',
     per: '1 egg (50g)',
     urlImage:
     'assets/images/search01/ingredients/25.jpg',
@@ -379,6 +403,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 26,
     name: 'Chicken',
+    cate: 'Meat, Fish',
     per: '1 part (114g)',
     urlImage:
     'assets/images/search01/ingredients/26.jpg',
@@ -394,6 +419,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 27,
     name: 'Beef',
+    cate: 'Meat, Fish',
     per: '3 ounces (85g) ',
     urlImage:
     'assets/images/search01/ingredients/27.jpg',
@@ -409,6 +435,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 28,
     name: 'Pork',
+    cate: 'Meat, Fish',
     per: '3-ounce (85g)',
     urlImage:
     'assets/images/search01/ingredients/28.jpg',
@@ -424,6 +451,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 29,
     name: 'Fish',
+    cate: 'Meat, Fish',
     per: 'half fillet (154g)',
     urlImage:
     'assets/images/search01/ingredients/29.jpg',
@@ -439,6 +467,7 @@ final allIngredietnts = <Ingredient>[
   Ingredient(
     id: 30,
     name: 'Shrimp',
+    cate: 'Meat, Fish',
     per: '3 oz (84g)',
     urlImage:
     'assets/images/search01/ingredients/30.jpg',
