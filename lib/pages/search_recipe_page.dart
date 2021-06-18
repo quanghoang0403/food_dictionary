@@ -103,9 +103,9 @@ class _Search02State extends State<Search02> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       option('Vegan', 'assets/icons/salad.png', 0),
-                      option('Low-Carb', 'assets/icons/rice.png', 1),
-                      option('Low-Fat', 'assets/icons/fruit.png', 2),
-                      option('HCG', 'assets/icons/fruit.png', 3),
+                      option('Low-Carb', 'assets/icons/low-carb.png', 1),
+                      option('Low-Fat', 'assets/icons/low-fat.png', 2),
+                      option('HCG', 'assets/icons/HCR.png', 3),
                     ],
                   ),
                 ),
@@ -153,8 +153,8 @@ class _Search02State extends State<Search02> {
         print(list_cate);
       },
       child: Container(
-        margin: EdgeInsets.only(left: 5, right: 5),
-        height: 48,
+        margin: EdgeInsets.only(left: 10, right: 10),
+        height: 52,
         width: 75,
         decoration: BoxDecoration(
           color: optionSelected[index] ? AppColors.cor1 : Colors.white,
@@ -172,12 +172,15 @@ class _Search02State extends State<Search02> {
         ),
         child: Column(
           children: [
-            SizedBox(
-              height: 27,
-              width: 50,
-              child: Image.asset(
-                image,
-                color: optionSelected[index] ? Colors.white : Colors.black,
+            Container(
+              margin: EdgeInsets.only(top: 3),
+              child: SizedBox(
+                height: 26,
+                width: 55,
+                child: Image.asset(
+                  image,
+                  color: optionSelected[index] ? Colors.white : Colors.black,
+                ),
               ),
             ),
             Text(
