@@ -48,7 +48,7 @@ class Person extends StatelessWidget {
     final controller = TextEditingController();
     List<Recipe> Recipes = allRecipes;
 
-    //final user = FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: ListView(
@@ -105,14 +105,21 @@ class Person extends StatelessWidget {
                       ),
                     ),
                     Positioned(
+                        top: 90,
+                        left: 145,
+                        child: CircleAvatar(
+                      maxRadius: 60,
+                      backgroundImage: NetworkImage(user.photoURL),
+                    )),
+                    Positioned(
                       top: 237,
                       left: 131,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           PrimaryText(
-                            text: 'Hoàng Đinh',
-                            //text: user.displayName,
+                            //text: 'Hoàng Đinh',
+                            text: user.displayName,
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                             size: 25,
@@ -127,8 +134,8 @@ class Person extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           PrimaryText(
-                            //text: user.email,
-                            text: 'quanghoang0403@gmail.com',
+                            text: user.email,
+                            //text: 'quanghoang0403@gmail.com',
                             color: Colors.black,
                             fontWeight: FontWeight.w400,
                             size: 15,
