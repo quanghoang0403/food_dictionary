@@ -187,8 +187,8 @@ class HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           PrimaryText(
-                            //text: 'Hi !',
-                            text: 'Hi '+ user.displayName +'!',
+                            text: 'Hi !',
+                            // text: 'Hi '+ user.displayName +'!',
                             color: Colors.white,
                             fontWeight: FontWeight.w500,
                             size: 20,
